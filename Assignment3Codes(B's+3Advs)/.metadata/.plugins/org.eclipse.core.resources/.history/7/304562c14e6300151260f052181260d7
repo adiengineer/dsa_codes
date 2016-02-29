@@ -1,0 +1,189 @@
+import java.util.Scanner;
+public class Tester 
+{
+	static int heapsize=0,sizelimit;
+	public static void main(String[] args) 
+	{
+	   //routine scanning and array generation.
+          Scanner sc=new Scanner(System.in);
+          
+          //assume that the array repersenting a complete tree is fixed i.e size is fixed.
+          
+         
+        
+         sizelimit=Integer.parseInt(sc.nextLine()); //array will have this limit
+         int[] heap=new int[sizelimit]; // max possible eleemnts will be decided by this limit.
+         
+         while(true)
+         {
+        	 int key=Integer.parseInt(sc.nextLine());
+        	 
+        	 if (key==-5)
+        		 break;
+        	 
+        	 insert(heap,key);
+        	 showheap(heap);
+         }
+         
+         while(true)
+         {
+        	 int deletefrom;
+        	 
+        	 deletefrom=Integer.parseInt(sc.nextLine());
+        	 
+        	 if (deletefrom==-5)
+        		 break;
+        	 
+        	 
+        	 delete(heap,deletefrom);
+        	 showheap(heap);
+         }
+         
+         sc.close();
+	}
+
+	public static void insert(int[] heap,int key)
+	{
+		int j,temp;
+		
+		if (heapsize>=sizelimit)
+			{System.out.println("Can't insert any more");
+			 return;
+			}
+
+		//if empty then simply insert at the beginning.
+		if (heapsize==0)
+			{heap[0]=key;
+			 heapsize++;
+			 return;
+			}
+		
+		//if it reaches here then at least some space is still empty.
+		heap[heapsize]=key; //insert in empty place.
+		heapsize++; //as one element is added.
+		
+		//now place this element in the correct position
+		j=heapsize-1; //place of last insert.
+		while(j>0)
+		{
+			if (heap[j]<=heap[(j-1)/2])
+				break;
+			else
+			{
+				//need to swap.
+				temp=heap[j];
+				heap[j]=heap[(j-1)/2];
+				heap[(j-1)/2]=temp;
+				j=(j-1)/2;
+			}
+		}
+	}
+	
+	public static void showheap(int[] heap)
+	{
+		for(int i=0;i<heapsize;i++)
+			System.out.print(heap[i]+" ");
+		System.out.println();
+	}
+	
+	public static int[] delete(int[] heap,int i)
+	{
+		int temp;
+		
+		if (heapsize<=0)
+			{System.out.println("Underflow");
+			 return heap;
+			}
+	   if (i<0 || i>=heapsize)
+	   {
+		   System.out.println("Check index for deletion");
+		   return heap;
+	   }
+		//first exchange exchange last with last as deletion from end in array very simple.
+		temp=heap[i];
+		heap[i]=heap[heapsize-1];
+		heap[heapsize-1]=temp;
+		
+		heapsize--;
+		
+		//call heapify on index i.
+		heap=heapify(heap,i);
+		
+		return heap;
+	}
+	
+	public static int[] heapify(int[] heap,int i)
+	{
+		int temp;
+		//i is where the problem exists, if corect i is given
+		// it will simply break out.
+		//assumption is that arr memory is equal to heap size.
+		
+		//continue till it has a left child.
+		while (2*i+1<heapsize)
+		{
+			if (heap[i]>=heap[2*i+1] && heap[i]>=heap[2*i+2]) //no problem exists.
+				break;
+			
+			//if problem exists then decide which direction to swap
+			//now if right child is not present then have to go to left.
+			if (2*i+2>=heapsize)
+			{
+				//swap with left child
+				temp=heap[i];
+				heap[i]=heap[2*i+1];
+				heap[2*i+1]=temp;
+				i=2*i+1;
+			}
+			
+			else //if right child exists have to compare two. 
+			{
+				if (heap[2*i+1]>=heap[2*i+2])
+				{
+					//swap with left
+					temp=heap[i];
+					heap[i]=heap[2*i+1];
+					heap[2*i+1]=temp;
+					i=2*i+1;
+				}
+				else
+				{
+					//swap with right
+					temp=heap[i];
+					heap[i]=heap[2*i+2];
+					heap[2*i+2]=temp;
+					i=2*i+2;
+				}
+			}
+		}
+           return heap;
+    }
+	
+	public static int[] increaseKeyValue(int i,int[] heap, int add)
+	{
+		///increase key value by add.
+		//now in increase key value we may have to shift node i's key upwards
+		int temp;
+		
+		if (i>=heapsize || i<0)
+		{System.out.println("Check i");
+		 return heap; //do nothing if input is wrong.
+		}
+		
+		heap[i]=heap[i]+add; //modify the keyvalue of node i.
+		
+		//now resolve the possible problem upwards.
+		
+	     while (heap[i]>heap[i/2]) //while problem exists.
+	     {
+	    	 //exchange child and parent
+	        temp=heap[i];
+	        heap[i]=heap[i/2];
+	        heap[i/2]=temp;
+	        
+	        i=i/2;
+	     }
+	     
+	     return heap; //with problem solved.
+	}
+}

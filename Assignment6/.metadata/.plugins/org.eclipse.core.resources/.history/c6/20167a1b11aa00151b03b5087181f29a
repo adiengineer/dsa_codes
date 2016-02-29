@@ -1,0 +1,11 @@
+
+public class Superhuman extends Human 
+{
+   String alterego;
+   
+   Superhuman(String name,int age,String alterego)
+   {
+	   super(name, age);
+	   this.alterego=alterego;
+   }
+}

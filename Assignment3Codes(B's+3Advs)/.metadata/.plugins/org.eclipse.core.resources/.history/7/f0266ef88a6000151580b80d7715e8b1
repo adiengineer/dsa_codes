@@ -1,0 +1,62 @@
+import java.util.Scanner;
+public class Tester 
+{
+	static int heapsize=0;
+	public static void main(String[] args) 
+	{
+	   //routine scanning and array generation.
+          Scanner sc=new Scanner(System.in);
+          
+          //assume that the array repersenting a complete tree is fixed i.e size is fixed.
+          
+         int sizelimit;
+        
+         sizelimit=Integer.parseInt(sc.nextLine()); //array will have this limit
+         int[] heap=new int[sizelimit]; // max possible eleemnts will be decided by this limit.
+         
+         
+	}
+
+	public static void insert(int[] heap,int key,int sizelimit)
+	{
+		int j,temp;
+		
+		if (heapsize>=sizelimit)
+			{System.out.println("Can't insert any more");
+			 return;
+			}
+
+		//if empty then simply insert at the beginning.
+		if (heapsize==0)
+			{heap[0]=key;
+			 return;
+			}
+		
+		//if it reaches here then at least some space is still empty.
+		heap[heapsize]=key; //insert in empty place.
+		heapsize++; //as one element is added.
+		
+		//now place this element in the correct position
+		j=heapsize-1; //place of last insert.
+		while(j>0)
+		{
+			if (heap[j]<=heap[(j-1)/2])
+				break;
+			else
+			{
+				//need to swap.
+				temp=heap[j];
+				heap[j]=heap[(j-1)/2];
+				heap[(j-1)/2]=temp;
+				j=(j-1)/2;
+			}
+		}
+	}
+	
+	public static void showheap(int[] heap,int heapsize)
+	{
+		for(int i=0;i<heap.length;i++)
+			System.out.print(heap[i]+" ");
+		System.out.println();
+	}
+}

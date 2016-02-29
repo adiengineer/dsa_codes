@@ -1,0 +1,25 @@
+import java.util.Scanner;
+public class Tester 
+{
+
+	public static void main(String[] args) 
+	{
+		// TODO Auto-generated method stub
+		Scanner sc=new Scanner(System.in);	
+
+		  Bst ab=new Bst();
+		  
+		  while (true)
+		  {
+			  int input=Integer.parseInt(sc.nextLine());
+			  
+			  if (input==-5)
+				  break;
+			  
+			  ab.insert(ab.root,input,null);
+			  
+		  }
+	}
+
+
+}

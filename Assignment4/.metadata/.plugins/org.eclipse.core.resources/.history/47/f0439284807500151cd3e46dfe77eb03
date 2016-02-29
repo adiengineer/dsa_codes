@@ -1,0 +1,38 @@
+import java.util.Scanner;
+
+public class Tester 
+{
+
+	public static void main(String[] args) 
+	{
+	Scanner sc=new Scanner(System.in);	
+
+	  AltBst ab=new AltBst();
+	  
+	  while (true)
+	  {
+		  int input=Integer.parseInt(sc.nextLine());
+		  
+		  if (input==-5)
+			  break;
+		  
+		  ab.insert(ab.root,input,0);
+		  
+	  }
+	  
+	  ab.inorder(ab.root);
+	  
+	  while (true)
+	  {
+int input=Integer.parseInt(sc.nextLine());
+		  
+		  if (input==-5)
+			  break;
+		  
+		  ab.search(ab.root,input,0);
+	  }
+	  
+	  sc.close();
+	}
+	
+}

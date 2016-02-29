@@ -1,0 +1,11 @@
+
+public class Superhero extends Human 
+{
+   String alterego;
+   
+   Superhero(String name,int age,String alterego)
+   {
+	   super(name, age);
+	   this.alterego=alterego;
+   }
+}

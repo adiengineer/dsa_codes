@@ -1,0 +1,16 @@
+
+public class Superhero extends Human 
+{
+   String alterego;
+   
+   Superhero(String name,int age,String alterego)
+   {
+	   super(name, age);
+	   this.alterego=alterego;
+   }
+   
+   public String introduce()
+   {
+	   return "Hello, My name is "+this.name+" . I am "+this.age+ " years old."+" Don't tell anyone that I am "+this.alterego+"!";
+   }
+}

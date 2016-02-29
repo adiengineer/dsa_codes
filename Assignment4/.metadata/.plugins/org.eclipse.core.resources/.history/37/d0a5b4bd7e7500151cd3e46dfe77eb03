@@ -1,0 +1,37 @@
+import java.util.Scanner;
+
+public class Tester 
+{
+
+	public static void main(String[] args) 
+	{
+	Scanner sc=new Scanner(System.in);	
+
+	  AltBst ab=new AltBst();
+	  
+	  while (true)
+	  {
+		  int input=Integer.parseInt(sc.nextLine());
+		  
+		  if (input==-5)
+			  break;
+		  
+		  ab.insert(ab.root,input,0);
+	  }
+	}
+
+	public void inorder(Node curr)
+	{
+		//base case is that curr is null
+		if (curr==null)
+			return;
+		
+		//else
+		inorder(curr.left);
+		
+		System.out.print(curr.key+" ");
+		
+		inorder(curr.right);
+	}
+	
+}

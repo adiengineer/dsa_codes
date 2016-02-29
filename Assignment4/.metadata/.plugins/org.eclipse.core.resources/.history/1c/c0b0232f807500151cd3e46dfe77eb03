@@ -1,0 +1,86 @@
+
+public class AltBst 
+{
+	
+//has a root attribute.	
+ Node root;   
+	
+	//recursive insert, it uses param insert to demarcate the level
+	public void insert(Node curr,int key,int level) //initial call (t.root,0)
+	{
+		//if level is even use normal rule else use inv rule.
+		if (root==null)
+		    {root=new Node(key,null);
+		    return;
+		    }
+		
+		//if nodes present
+		if (level%2==0) //if level is even, normal
+		{
+			if (curr.key>key) //assume distinct.
+			{
+				if (curr.left==null)
+				{
+					curr.left=new Node(key,curr);
+					return;
+				}
+				
+				insert(curr.left,key,level+1);
+			}
+			
+			else if (curr.key<key)
+			{
+				if (curr.right==null)
+				{
+					curr.right=new Node(key,curr);
+					return;
+				}
+				
+				insert(curr.right,key,level+1);
+
+			}
+		}
+		
+		else ///if odd, inv the rule.
+		{
+			if (curr.key>key) //assume distinct.
+			{
+				if (curr.right==null)
+				{
+					curr.right=new Node(key,curr);
+					return;
+				}
+				
+				insert(curr.right,key,level+1);
+			}
+			
+			else if (curr.key<key)
+			{
+				if (curr.left==null)
+				{
+					curr.left=new Node(key,curr);
+					return;
+				}
+				
+				insert(curr.left,key,level+1);
+
+			}
+		}
+	}
+	
+	public void inorder(Node curr)
+	{
+		//base case is that curr is null
+		if (curr==null)
+			return;
+		
+		//else
+		inorder(curr.left);
+		
+		System.out.print(curr.key+" ");
+		
+		inorder(curr.right);
+	}
+	
+}
+

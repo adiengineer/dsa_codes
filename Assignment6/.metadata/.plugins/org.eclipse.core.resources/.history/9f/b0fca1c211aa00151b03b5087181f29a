@@ -1,0 +1,21 @@
+
+public class Human 
+{
+   String name;
+   int age;
+   
+   //behaviour
+   
+   Human(String name, int age)
+   {
+	   this.name=name;
+	   this.age=age;
+   }
+   
+   public String introduce()
+   {
+	   String sentence;
+	  
+	   return "Hello, My name is "+this.name+" . I am "+this.age+ " years old.";
+   }
+}
